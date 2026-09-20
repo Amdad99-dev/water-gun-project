@@ -1,0 +1,350 @@
+/* =========================================================
+   Design tokens (CSS custom properties)
+   ========================================================= */
+:root {
+  --bg: #10231d;
+  --bg-deep: #0a1712;
+  --panel: #16302699;
+  --line: #2c4a3d;
+  --cream: #ece4d3;
+  --cream-dim: #b9b2a2;
+  --venom: #c8e356;
+  --water: #4fa9e8;
+  --gun: #d98c4a;
+  --draw: #8a8578;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background:
+    radial-gradient(1200px 700px at 20% -10%, #1a3b2e 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 110%, #142a22 0%, transparent 55%),
+    var(--bg);
+  color: var(--cream);
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   Layout shell
+   ========================================================= */
+.stage {
+  width: min(560px, 92vw);
+  padding: 28px 26px 32px;
+  margin: 24px 0;
+}
+
+h1 {
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: clamp(28px, 6vw, 40px);
+  letter-spacing: -0.01em;
+  margin: 0 0 4px;
+  line-height: 1.05;
+}
+
+h1 span {
+  color: var(--venom);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.sub {
+  color: var(--cream-dim);
+  font-size: 14.5px;
+  margin: 0 0 26px;
+  max-width: 46ch;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   Scoreboard
+   ========================================================= */
+.score-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.score-card {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.score-card .label {
+  font-size: 11.5px;
+  color: var(--cream-dim);
+  margin-bottom: 4px;
+}
+
+.score-card .value {
+  font-family: "Fraunces", serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.score-card.you .value {
+  color: var(--venom);
+}
+
+.score-card.comp .value {
+  color: var(--gun);
+}
+
+.score-card.rounds .value {
+  color: var(--cream-dim);
+  font-size: 22px;
+}
+
+/* =========================================================
+   Game board
+   ========================================================= */
+.board {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 22px;
+  position: relative;
+  min-height: 200px;
+}
+
+.duel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 108px;
+}
+
+.fighter {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0e1f18;
+  border: 2px solid var(--line);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.35s,
+    box-shadow 0.35s;
+}
+
+.fighter svg {
+  width: 46px;
+  height: 46px;
+}
+
+.fighter.win {
+  border-color: var(--venom);
+  box-shadow: 0 0 0 4px #c8e35622;
+  transform: scale(1.08);
+}
+
+.fighter.lose {
+  border-color: #5c4a3a;
+  opacity: 0.55;
+  transform: scale(0.94);
+}
+
+.fighter.pop {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.6) rotate(-8deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.vs {
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  color: var(--cream-dim);
+  font-size: 15px;
+}
+
+/* =========================================================
+   Result banner
+   ========================================================= */
+.result {
+  text-align: center;
+  min-height: 30px;
+  font-size: 15px;
+  margin-top: 14px;
+  color: var(--cream-dim);
+}
+
+.result.you {
+  color: var(--venom);
+  font-weight: 600;
+}
+
+.result.comp {
+  color: var(--gun);
+  font-weight: 600;
+}
+
+.result.draw {
+  color: var(--draw);
+  font-weight: 600;
+}
+
+/* =========================================================
+   Choice buttons
+   ========================================================= */
+.picks {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.pick {
+  flex: 1;
+  background: #0e1f18;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 8px 12px;
+  color: var(--cream);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.pick svg {
+  width: 34px;
+  height: 34px;
+}
+
+.pick:hover {
+  transform: translateY(-3px);
+  border-color: var(--cream-dim);
+  background: #132920;
+}
+
+.pick:active {
+  transform: translateY(0);
+}
+
+.pick:focus-visible {
+  outline: 2px solid var(--venom);
+  outline-offset: 2px;
+}
+
+.pick:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =========================================================
+   Round history chips
+   ========================================================= */
+.log {
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.log .chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.chip.win {
+  background: var(--venom);
+  color: #0e1f18;
+}
+
+.chip.lose {
+  background: #4a3327;
+  color: var(--gun);
+}
+
+.chip.draw {
+  background: #3a3a30;
+  color: var(--draw);
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.reset {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--cream-dim);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 12.5px;
+  padding: 7px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.reset:hover {
+  border-color: var(--cream-dim);
+  color: var(--cream);
+}
+
+.hint {
+  font-size: 12px;
+  color: #6f7a72;
+}
+
+/* =========================================================
+   Accessibility: respect reduced-motion preference
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .fighter,
+  .pick,
+  .reset {
+    transition: none;
+    animation: none;
+  }
+}

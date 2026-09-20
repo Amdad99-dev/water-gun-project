@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake · Water · Gun</title>
+
+  <!-- Google Fonts: display + body typefaces -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+
+  <main class="stage">
+    <header>
+      <h1>Snake, Water, <span>Gun</span></h1>
+      <p class="sub">
+        The three-way standoff: the snake drinks the water, the water jams the gun,
+        the gun kills the snake. Pick your weapon.
+      </p>
+    </header>
+
+    <!-- Scoreboard -->
+    <section class="score-row" aria-label="Scoreboard">
+      <div class="score-card you">
+        <div class="label">You</div>
+        <div class="value" id="userScore">0</div>
+      </div>
+      <div class="score-card rounds">
+        <div class="label">Rounds</div>
+        <div class="value" id="roundCount">0</div>
+      </div>
+      <div class="score-card comp">
+        <div class="label">Computer</div>
+        <div class="value" id="compScore">0</div>
+      </div>
+    </section>
+
+    <!-- Game board -->
+    <section class="board">
+      <div class="duel">
+        <div class="fighter" id="userFighter">
+          <svg viewBox="0 0 48 48" fill="none" id="userIcon"></svg>
+        </div>
+        <div class="vs">vs</div>
+        <div class="fighter" id="compFighter">
+          <svg viewBox="0 0 48 48" fill="none" id="compIcon"></svg>
+        </div>
+      </div>
+
+      <p class="result" id="resultText">Choose Snake, Water or Gun to start.</p>
+
+      <!-- Choice buttons (data-choice drives the game logic) -->
+      <div class="picks" id="picks">
+        <button class="pick" data-choice="S" aria-label="Choose Snake">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M10 30c0-8 6-16 14-16 6 0 8 5 8 9s-3 6-6 6-4-2-4-5" stroke="#c8e356" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="32" cy="20" r="3.4" fill="#c8e356"/>
+            <path d="M8 32c2 4 6 6 10 5" stroke="#c8e356" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          Snake
+        </button>
+        <button class="pick" data-choice="W" aria-label="Choose Water">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 8c6 9 11 15.5 11 21.5A11 11 0 1 1 13 29.5C13 23.5 18 17 24 8Z" stroke="#4fa9e8" stroke-width="3" stroke-linejoin="round"/>
+          </svg>
+          Water
+        </button>
+        <button class="pick" data-choice="G" aria-label="Choose Gun">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M8 26h18l4-5h6v5h4v6h-8l-3 5h-9v-6H8z" stroke="#d98c4a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M14 32v5" stroke="#d98c4a" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          Gun
+        </button>
+      </div>
+
+      <div class="log" id="log" aria-label="Round history"></div>
+    </section>
+
+    <footer class="footer-row">
+      <span class="hint">S beats W · W beats G · G beats S</span>
+      <button class="reset" id="resetBtn">Reset match</button>
+    </footer>
+  </main>
+
+  <!-- Load as an ES module: allows import/export across files -->
+  <script type="module" src="src/js/main.js"></script>
+</body>
+</html>
